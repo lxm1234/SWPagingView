@@ -1,0 +1,6 @@
+framework module SWPagingView {
+  umbrella header "SWPagingView-umbrella.h"
+
+  export *
+  module * { export * }
+}

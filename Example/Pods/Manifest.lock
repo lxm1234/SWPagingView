@@ -1,0 +1,16 @@
+PODS:
+  - SWPagingView (0.1.0)
+
+DEPENDENCIES:
+  - SWPagingView (from `../`)
+
+EXTERNAL SOURCES:
+  SWPagingView:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  SWPagingView: c05a32043b3830fefb24231466e578a2cb971938
+
+PODFILE CHECKSUM: f7777f4e52022cdbc60892e054b76081e012f50d
+
+COCOAPODS: 1.5.3
