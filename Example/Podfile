@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'SWPagingView_Example' do
+  pod 'SWPagingView', :path => '../'
+
+  target 'SWPagingView_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
