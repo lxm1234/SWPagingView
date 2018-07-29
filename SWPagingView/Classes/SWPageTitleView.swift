@@ -25,15 +25,15 @@ open class SWPageTitleView: UIView {
   /** 重置选中标题按钮下标（用于子控制器内的点击事件改变标题的选中下标）*/
   var resetSelectedIndex: Int = 0
   /// SWPageTitleViewDelegate
-  private weak var delegatePageTitleView: SWPageTitleViewDelegate?
+  weak var delegatePageTitleView: SWPageTitleViewDelegate?
   /// SWPageTitleView 配置信息
-  private var configure: SWPageTitleViewConfigure!
+  var configure: SWPageTitleViewConfigure!
   /// scrollView
-  private var isScroller: Bool = false
+  var isScroller: Bool = false
   /// 按钮之间的间距
-  private var btnSpace: CGFloat = 0
+  var btnSpace: CGFloat = 0
 
-  private lazy var scrollView: UIScrollView = {
+  lazy var scrollView: UIScrollView = {
     let scrollView = UIScrollView()
     scrollView.showsVerticalScrollIndicator = false
     scrollView.showsHorizontalScrollIndicator = false
@@ -43,7 +43,7 @@ open class SWPageTitleView: UIView {
     return scrollView
   }()
   /// 指示器
-  private lazy var indicatorView: UIView = {
+  lazy var indicatorView: UIView = {
     let indicatorView = UIView()
     if self.configure.indicatorStyle == .cover {
       //遮盖样式指示器的高度
@@ -67,7 +67,7 @@ open class SWPageTitleView: UIView {
   }()
 
   /// 底部分割线
-  private lazy var bottomSeparator: UIView = {
+  lazy var bottomSeparator: UIView = {
     let view = UIView()
     let bottomSeparatorW: CGFloat = self.frame.width
     let bottomSeparatorH: CGFloat = 0.5
@@ -78,23 +78,23 @@ open class SWPageTitleView: UIView {
     return view
   }()
   /// 保存外界传递过来的标题数组
-  private var titleArr: [String] = []
+  var titleArr: [String] = []
   /// 存储标题按钮的数组
-  private var btnMArr: [UIButton] = []
+  var btnMArr: [UIButton] = []
   /// tempBtn
-  private var tempBtn: UIButton?
+  var tempBtn: UIButton?
   /// 记录所有按钮文字宽度
-  private var allBtnTextWidth: CGFloat = 0
+  var allBtnTextWidth: CGFloat = 0
   /// 标记按钮下标
-  private var signBtnIndex: Int = 0
+  var signBtnIndex: Int = 0
   /// 开始颜色, 取值范围 0~1
-  private var startR: CGFloat = 0
-  private var startG: CGFloat = 0
-  private var startB: CGFloat = 0
+  var startR: CGFloat = 0
+  var startG: CGFloat = 0
+  var startB: CGFloat = 0
   /// 完成颜色, 取值范围 0~1
-  private var endR: CGFloat = 0
-  private var endG: CGFloat = 0
-  private var endB: CGFloat = 0
+  var endR: CGFloat = 0
+  var endG: CGFloat = 0
+  var endB: CGFloat = 0
 
   public init(frame: CGRect, delegate: SWPageTitleViewDelegate, titleNames: [String], configure: SWPageTitleViewConfigure) {
     super.init(frame: frame)
@@ -139,7 +139,7 @@ open class SWPageTitleView: UIView {
     let titleCount = self.titleArr.count
     self.isScroller = allWidth > self.frame.width
     self.btnSpace = self.isScroller ? self.configure.spacingBetweenButtons : (self.frame.width - self.allBtnTextWidth) / CGFloat(titleCount)
-    var btnX:CGFloat = 20
+    var btnX: CGFloat = 20
     let btnH: CGFloat = (self.configure.indicatorStyle == .underLine) ? (self.frame.height - self.configure.indicatorHeight) : self.frame.height
     for index in 0..<titleCount {
       let btnW: CGFloat = self.titleArr[index].sw_sizeWithString(font: self.configure.titleFont).width
@@ -292,7 +292,7 @@ public extension SWPageTitleView {
     let originalButton = self.btnMArr[originalIndex]
     let targetButton = self.btnMArr[targetIndex]
     self.signBtnIndex = targetButton.tag
-    
+
     // 2、 滚动标题选中居中
     self.selectedBtnCenter(targetButton)
     // 3、处理指示器的逻辑
@@ -303,10 +303,10 @@ public extension SWPageTitleView {
     if self.configure.isOpenTitleTextZoom {
       //左边缩放
       originalButton.transform = CGAffineTransform.init(scaleX: (1 - progress) * self.configure.titleTextScaling + 1,
-                                                        y: (1 - progress) * self.configure.titleTextScaling + 1)
+        y: (1 - progress) * self.configure.titleTextScaling + 1)
       //右边缩放
       targetButton.transform = CGAffineTransform.init(scaleX: progress * self.configure.titleTextScaling + 1,
-                                                      y: progress * self.configure.titleTextScaling + 1)
+        y: progress * self.configure.titleTextScaling + 1)
     }
   }
 
@@ -325,19 +325,19 @@ public extension SWPageTitleView {
       let targetProgress = progress
       // 获取 originalProgress
       let originalProgress = 1 - targetProgress
-      
+
       let r = self.endR - self.startR
       let g = self.endG - self.startG
       let b = self.endB - self.startB
       let originalColor = UIColor.init(red: self.startR + r * originalProgress,
-                                       green: self.startG + g * originalProgress,
-                                       blue: self.startB + b * originalProgress,
-                                       alpha: 1)
+        green: self.startG + g * originalProgress,
+        blue: self.startB + b * originalProgress,
+        alpha: 1)
       let targetColor = UIColor.init(red: self.startR + r * targetProgress,
-                                     green: self.startG + g * targetProgress,
-                                     blue: self.startB + b * targetProgress,
-                                     alpha: 1)
-      
+        green: self.startG + g * targetProgress,
+        blue: self.startB + b * targetProgress,
+        alpha: 1)
+
       // 设置文字颜色渐变
       originalBtn.titleLabel?.textColor = originalColor
       targetBtn.titleLabel?.textColor = targetColor
@@ -345,7 +345,7 @@ public extension SWPageTitleView {
       if progress == 1, originalBtn.tag != targetBtn.tag {
         originalBtn.titleLabel?.textColor = self.configure.titleColor
         targetBtn.titleLabel?.textColor = self.configure.titleSelectedColor
-        
+
       }
     }
   }

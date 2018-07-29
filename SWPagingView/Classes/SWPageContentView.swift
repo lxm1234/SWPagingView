@@ -29,11 +29,11 @@ import UIKit
 
 open class SWPageContentView: UIView {
 
-  private var parentViewController: UIViewController?
-  private var childViewControllers: [UIViewController]?
+   var parentViewController: UIViewController?
+   var childViewControllers: [UIViewController]?
   public var delegatePageContentView: SWPageContentViewDelegate?
 
-  private lazy var collectionView: UICollectionView = {
+   lazy var collectionView: UICollectionView = {
     let flowLayout = UICollectionViewFlowLayout()
     flowLayout.itemSize = self.bounds.size
     flowLayout.minimumLineSpacing = 0
@@ -59,9 +59,9 @@ open class SWPageContentView: UIView {
   }()
 
   /// 记录刚开始时的偏移量
-  private var startOffsetX: CGFloat = 0
+   var startOffsetX: CGFloat = 0
   /// 标记按钮是否点击
-  private var isClickBtn: Bool = false
+   var isClickBtn: Bool = false
 
   public init(frame: CGRect, parentVC: UIViewController, childVCs: [UIViewController]) {
     super.init(frame: frame)
